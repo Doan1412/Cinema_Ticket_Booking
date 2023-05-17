@@ -26,7 +26,7 @@ public class Booking {
     private Show show;
     @ManyToOne
     private Customer customer;
-    @OneToOne(mappedBy = "booking")
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "booking", cascade = CascadeType.ALL)
     private Payment payment;
     @OneToMany
     private List<ShowSeat> showSeats;

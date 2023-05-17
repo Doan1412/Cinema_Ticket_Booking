@@ -1,6 +1,8 @@
 package com.example.cinema_booking_system.Controller;
 
 import com.example.cinema_booking_system.Model.Movie;
+import com.example.cinema_booking_system.Model.Show;
+import com.example.cinema_booking_system.Repositories.MovieRepository;
 import com.example.cinema_booking_system.Services.MovieServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,11 +14,14 @@ import java.util.List;
 @RestController
 @RequestMapping(path="api/movie")
 public class MovieController {
-    @Autowired
     private MovieServices movieServices;
+    private final MovieRepository movieRepository;
 
-    public MovieController(MovieServices movieServices) {
+    @Autowired
+    public MovieController(MovieServices movieServices,
+                           MovieRepository movieRepository) {
         this.movieServices = movieServices;
+        this.movieRepository = movieRepository;
     }
     @GetMapping()
     public ResponseEntity<List<Movie>>getAll(){
@@ -38,5 +43,9 @@ public class MovieController {
     @PatchMapping("/update")
     public ResponseEntity<Movie>updateMovie(@RequestBody Movie movie){
         return new ResponseEntity<>(movieServices.update(movie),HttpStatus.OK);
+    }
+    @GetMapping("/show/id={id}")
+    public ResponseEntity<List<Show>> getListShow(@PathVariable long id){
+        return  new ResponseEntity<>(movieServices.getListShowByMovieId(id),HttpStatus.OK);
     }
 }

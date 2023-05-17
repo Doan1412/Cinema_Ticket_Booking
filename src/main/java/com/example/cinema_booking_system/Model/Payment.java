@@ -18,7 +18,7 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(mappedBy = "payment")
+    @OneToOne(fetch = FetchType.LAZY)
     private Booking booking;
     private double amount;
     private LocalDateTime paymentDate;

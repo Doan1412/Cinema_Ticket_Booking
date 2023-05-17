@@ -8,9 +8,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class ShowSeat extends CinemaHallSeat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +21,14 @@ public class ShowSeat extends CinemaHallSeat {
     @ManyToOne
     @JoinColumn(name = "show_id")
     private Show show;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "booking_id")
     private Booking booking;
+
+    public ShowSeat(double price,boolean isReserved,  CinemaHallSeat cinemaHallSeat, Show show) {
+        this.isReserved = isReserved;
+        this.price = price;
+        this.cinemaHallSeat = cinemaHallSeat;
+        this.show = show;
+    }
 }

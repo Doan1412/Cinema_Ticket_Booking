@@ -49,6 +49,9 @@ public class ShowServices {
         List<Show> overlappingShows = findOverlappingShows(cinemaHall, startTime, endTime);
         return !overlappingShows.isEmpty();
     }
+    public List<Show>getList(){
+        return showRepository.findAll();
+    }
     @Transactional
     public Show create(ShowDTO showDTO){
         Movie movie = movieRepository.findById(showDTO.getMovieId()).orElseThrow();
@@ -67,12 +70,7 @@ public class ShowServices {
                 for (int i=0;i<showDTO.getSeatTypes().size();i++) {
                     SeatType type = showDTO.getSeatTypes().get(i);
                     if(cinemaHallSeat.getSeatType() == type){
-                        var showSeat = ShowSeat.builder()
-                                .price(showDTO.getSeatPrices().get(i))
-                                .isReserved(false)
-                                .cinemaHallSeat(cinemaHallSeat)
-                                .show(s)
-                                .build();
+                        ShowSeat showSeat = new ShowSeat(showDTO.getSeatPrices().get(i),false,cinemaHallSeat,s);
                         showSeatRepository.save(showSeat);
                         s.getShowSeats().add(showSeat);
                     }

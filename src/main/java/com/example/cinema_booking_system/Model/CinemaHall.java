@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.engine.internal.Cascade;
 
 import java.util.List;
 
@@ -19,6 +20,6 @@ public class CinemaHall {
     Long id;
     String name;
     int capacity;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<CinemaHallSeat> cinemaHallSeat;
 }

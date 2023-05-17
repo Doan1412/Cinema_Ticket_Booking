@@ -27,6 +27,6 @@ public class Show {
     @ManyToOne
     @JoinColumn(name = "cinema_hall_id")
     private CinemaHall cinemaHall;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ShowSeat> showSeats;
 }

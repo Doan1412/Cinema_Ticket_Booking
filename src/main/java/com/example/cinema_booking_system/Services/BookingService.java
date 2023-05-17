@@ -11,19 +11,19 @@ import com.example.cinema_booking_system.Repositories.ShowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookingService {
-    private final BookingService bookingService;
     private final ShowRepository showRepository;
     private final CustomerRepository customerRepository;
     private final BookingRepository bookingRepository;
     private final PaymentRepository paymentRepository;
 
     @Autowired
-    public BookingService(BookingService bookingService, ShowRepository showRepository,CustomerRepository customerRepository,
+    public BookingService(ShowRepository showRepository,CustomerRepository customerRepository,
                           BookingRepository bookingRepository,
                           PaymentRepository paymentRepository) {
-        this.bookingService = bookingService;
         this.showRepository = showRepository;
         this.customerRepository = customerRepository;
         this.bookingRepository = bookingRepository;
@@ -53,5 +53,15 @@ public class BookingService {
         Payment p = paymentRepository.save(payment);
         b.setPayment(p);
         return bookingRepository.save(b);
+    }
+    public Booking getById(long id){
+        return bookingRepository.findById(id).orElseThrow();
+    }
+    public List<Booking> getListBookingByShowId(long id){
+        return bookingRepository.findByShowId(id);
+    }
+
+    public List<Booking> getListBookingByCustomer(long id){
+        return bookingRepository.findByCustomerId(id);
     }
 }
