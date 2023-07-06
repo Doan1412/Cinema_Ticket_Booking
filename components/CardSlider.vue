@@ -47,14 +47,18 @@
                                             </ul>
 
                                             <span
-                                                class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">{{ movie.rating }}</span>
+                                                class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">{{
+                                                    movie.rating }}</span>
                                         </div>
                                         <div class="flex items-center justify-between">
-                                            <span class="text-3xl font-bold text-gray-900 dark:text-white">$599</span>
-                                            <a href="#"
+
+                                            <a :href="`/movie/${movie.id}`"
                                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                Buy ticket
-                                            </a>
+                                                Details
+                                        </a>
+                                            <button type="button"
+                                                class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Buy
+                                                tickets</button>
                                         </div>
                                     </div>
                                 </div>

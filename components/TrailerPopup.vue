@@ -7,7 +7,7 @@
       </button>
   
       <!-- Modal -->
-      <div v-show="isModalOpen" class="fixed inset-0 z-50 flex items-center justify-center">
+      <div v-show="isModalOpen" class="fixed inset-0 z-50 flex items-center justify-center" id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" >
         <div class="relative w-full max-w-6xl">
           <!-- Modal content -->
           <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">

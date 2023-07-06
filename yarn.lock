@@ -1410,6 +1410,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.21.0":
+  version: 7.22.6
+  resolution: "@babel/runtime@npm:7.22.6"
+  dependencies:
+    regenerator-runtime: ^0.13.11
+  checksum: e585338287c4514a713babf4fdb8fc2a67adcebab3e7723a739fc62c79cfda875b314c90fd25f827afb150d781af97bc16c85bfdbfa2889f06053879a1ddb597
+  languageName: node
+  linkType: hard
+
 "@babel/standalone@npm:^7.21.3":
   version: 7.22.5
   resolution: "@babel/standalone@npm:7.22.5"
@@ -3008,6 +3017,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vuepic/vue-datepicker@npm:^5.4.0":
+  version: 5.4.0
+  resolution: "@vuepic/vue-datepicker@npm:5.4.0"
+  dependencies:
+    date-fns: ^2.30.0
+    date-fns-tz: ^1.3.7
+  peerDependencies:
+    vue: ">=3.2.0"
+  checksum: 7f4d7bee02567c91c6f538f09e3816f99b945442cf1b850ca0d697f5c4599284fca0ab6a9d1cea902822be9a711554c55220d3b5a82193afda23cf546d04fc73
+  languageName: node
+  linkType: hard
+
 "@webassemblyjs/ast@npm:1.9.0":
   version: 1.9.0
   resolution: "@webassemblyjs/ast@npm:1.9.0"
@@ -3211,6 +3232,7 @@ __metadata:
     "@nuxt/typescript-build": ^2.1.0
     "@nuxtjs/axios": ^5.13.6
     "@nuxtjs/tailwindcss": ^5.3.5
+    "@vuepic/vue-datepicker": ^5.4.0
     core-js: ^3.25.3
     eslint-config-prettier: ^8.5.0
     flowbite: ^1.6.6
@@ -3221,6 +3243,8 @@ __metadata:
     vue-server-renderer: ^2.7.10
     vue-slick-carousel: ^1.0.6
     vue-template-compiler: ^2.7.10
+    vue-youtube-embed: ^2.2.2
+    vuejs-datepicker: ^1.6.2
   languageName: unknown
   linkType: soft
 
@@ -3257,12 +3281,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.0.4, acorn@npm:^8.5.0, acorn@npm:^8.8.2, acorn@npm:^8.9.0":
+"acorn@npm:^8.0.4, acorn@npm:^8.8.2, acorn@npm:^8.9.0":
   version: 8.9.0
   resolution: "acorn@npm:8.9.0"
   bin:
     acorn: bin/acorn
   checksum: 25dfb94952386ecfb847e61934de04a4e7c2dc21c2e700fc4e2ef27ce78cb717700c4c4f279cd630bb4774948633c3859fc16063ec8573bda4568e0a312e6744
+  languageName: node
+  linkType: hard
+
+"acorn@npm:^8.5.0":
+  version: 8.10.0
+  resolution: "acorn@npm:8.10.0"
+  bin:
+    acorn: bin/acorn
+  checksum: 538ba38af0cc9e5ef983aee196c4b8b4d87c0c94532334fa7e065b2c8a1f85863467bb774231aae91613fcda5e68740c15d97b1967ae3394d20faddddd8af61d
   languageName: node
   linkType: hard
 
@@ -5099,6 +5132,24 @@ __metadata:
   version: 1.0.2
   resolution: "cyclist@npm:1.0.2"
   checksum: d7c0336565b9b72ee72347831cbd05fadcc59cc9ab89dcf38293b1a64c2c5fb777c9ce44967390dabe8235f9898f5cb222cd6672f4920b757da8861310082716
+  languageName: node
+  linkType: hard
+
+"date-fns-tz@npm:^1.3.7":
+  version: 1.3.8
+  resolution: "date-fns-tz@npm:1.3.8"
+  peerDependencies:
+    date-fns: ">=2.0.0"
+  checksum: dbf17cb88de7c7b71a9f86b815ac62ebdbf725c030e78d2421309456b5001a85284a5b6763f4af0ba660183f12e876c165e725a0723f642edb7846407db03133
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:^2.30.0":
+  version: 2.30.0
+  resolution: "date-fns@npm:2.30.0"
+  dependencies:
+    "@babel/runtime": ^7.21.0
+  checksum: f7be01523282e9bb06c0cd2693d34f245247a29098527d4420628966a2d9aad154bd0e90a6b1cf66d37adcb769cd108cf8a7bd49d76db0fb119af5cdd13644f4
   languageName: node
   linkType: hard
 
@@ -13091,6 +13142,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vue-youtube-embed@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "vue-youtube-embed@npm:2.2.2"
+  checksum: ac871ee983892c79b746d2fc5112da76719b92adcfa7c8de43e6e01618acd0ea82a24583c0b81a8cadfbff6a0f69a8a39c173384681720d2fc89e7e55e3c461a
+  languageName: node
+  linkType: hard
+
 "vue@npm:^2.6.10, vue@npm:^2.7.10":
   version: 2.7.14
   resolution: "vue@npm:2.7.14"
@@ -13098,6 +13156,15 @@ __metadata:
     "@vue/compiler-sfc": 2.7.14
     csstype: ^3.1.0
   checksum: 8b06da67cc40870c66a30b7a6bc2874950cd4383792c371eb30497dd14fc7b41cf308b1c4517368d8f0e7ac16198c08de19236f6a79fe43f4bdbc4a1d9d4ad07
+  languageName: node
+  linkType: hard
+
+"vuejs-datepicker@npm:^1.6.2":
+  version: 1.6.2
+  resolution: "vuejs-datepicker@npm:1.6.2"
+  peerDependencies:
+    vue: ^2.6.10
+  checksum: 9d047ef499683da8fb162bb3454b60369c63e9e149d8e5cc047be0df649475a8cd8cf5f8a22f76107bbdfcfb593f34bd9abce1b03ad2caaaf96da75d7546a4ef
   languageName: node
   linkType: hard
 
