@@ -32,10 +32,11 @@ public class ShowServices {
     }
     public List<Show> findOverlappingShows(CinemaHall cinemaHall, LocalDateTime startTime, LocalDateTime endTime) {
         List<Show> allShows = showRepository.findByCinemaHall(cinemaHall);
-
         List<Show> overlappingShows = new ArrayList<>();
+        if (allShows.isEmpty()) return overlappingShows;
         for (Show show : allShows) {
             LocalDateTime showStartTime = show.getStartTime();
+            if (showStartTime == null) continue; // Skip iteration if showStartTime is null
             LocalDateTime showEndTime = showStartTime.plusMinutes(show.getMovie().getDuartionMin());
 
             if ((showStartTime.isAfter(startTime) && showStartTime.isBefore(endTime)) ||
@@ -58,6 +59,7 @@ public class ShowServices {
         CinemaHall cinemaHall = cinemaHallRepository.findById(showDTO.getCinemaHallId()).orElseThrow();
         if (!isShowOverlap(cinemaHall,showDTO.getStartTime(),showDTO.getStartTime().plusMinutes(movie.getDuartionMin()))){
             var show = Show.builder()
+                    .startTime(showDTO.getStartTime())
                     .createOn(showDTO.getCreateOn())
                     .duration(showDTO.getDuration())
                     .movie(movie)
@@ -66,16 +68,18 @@ public class ShowServices {
             Show s = showRepository.save(show);
             movie.getListShow().add(s);
             List<CinemaHallSeat> cinemaHallSeats = cinemaHallSeatReposity.findByCinemaHallId(showDTO.getCinemaHallId());
+            List<ShowSeat> showSeats = new ArrayList<>();
             for (CinemaHallSeat cinemaHallSeat:cinemaHallSeats) {
                 for (int i=0;i<showDTO.getSeatTypes().size();i++) {
                     SeatType type = showDTO.getSeatTypes().get(i);
                     if(cinemaHallSeat.getSeatType() == type){
                         ShowSeat showSeat = new ShowSeat(showDTO.getSeatPrices().get(i),false,cinemaHallSeat,s);
                         showSeatRepository.save(showSeat);
-                        s.getShowSeats().add(showSeat);
+                        showSeats.add(showSeat);
                     }
                 }
             }
+            s.setShowSeats(showSeats);
             return showRepository.save(s);
         }
 
@@ -102,5 +106,8 @@ public class ShowServices {
         Show s = showRepository.save(show);
         movie.getListShow().add(s);
         return s;
+    }
+    public List<Show> getByMovieId(long id){
+        return showRepository.findByMovieId(id);
     }
 }

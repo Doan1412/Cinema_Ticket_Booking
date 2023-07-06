@@ -11,4 +11,5 @@ import java.util.List;
 public interface ShowRepository extends JpaRepository<Show,Long> {
 
     List<Show> findByCinemaHall(CinemaHall cinemaHall);
+    List<Show> findByMovieId(long id);
 }

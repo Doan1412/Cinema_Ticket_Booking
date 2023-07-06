@@ -48,4 +48,12 @@ public class MovieController {
     public ResponseEntity<List<Show>> getListShow(@PathVariable long id){
         return  new ResponseEntity<>(movieServices.getListShowByMovieId(id),HttpStatus.OK);
     }
+    @GetMapping("/isAdvertise")
+    public ResponseEntity<List<Movie>>getListIsAdvertise(){
+        return new ResponseEntity<>(movieServices.getListMovieIsAdvertise(),HttpStatus.OK);
+    }
+    @GetMapping("/nowShow")
+    public ResponseEntity<List<Movie>>getListNowShow(){
+        return new ResponseEntity<>(movieServices.getListNowShow(),HttpStatus.OK);
+    }
 }

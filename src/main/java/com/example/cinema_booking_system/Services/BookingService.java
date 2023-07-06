@@ -11,6 +11,7 @@ import com.example.cinema_booking_system.Repositories.ShowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -63,5 +64,11 @@ public class BookingService {
 
     public List<Booking> getListBookingByCustomer(long id){
         return bookingRepository.findByCustomerId(id);
+    }
+    public List<Booking> getListBookingBetween(Date d1, Date d2){
+        return bookingRepository.findByCreateOnBetween(d1,d2);
+    }
+    public void deteleBooking(long id){
+        bookingRepository.deleteById(id);
     }
 }

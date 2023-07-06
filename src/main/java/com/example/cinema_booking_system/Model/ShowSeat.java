@@ -1,5 +1,6 @@
 package com.example.cinema_booking_system.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,18 +18,36 @@ public class ShowSeat extends CinemaHallSeat {
     double price;
     @OneToOne
     @JoinColumn(name = "cinema_hall_seat_id")
+    @JsonIgnore
     private CinemaHallSeat cinemaHallSeat;
     @ManyToOne
     @JoinColumn(name = "show_id")
+    @JsonIgnore
     private Show show;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "booking_id")
+    @JsonIgnore
     private Booking booking;
+    public ShowSeat(){
+
+    }
 
     public ShowSeat(double price,boolean isReserved,  CinemaHallSeat cinemaHallSeat, Show show) {
         this.isReserved = isReserved;
         this.price = price;
         this.cinemaHallSeat = cinemaHallSeat;
         this.show = show;
+    }
+
+    @Override
+    public String toString() {
+        return "ShowSeat{" +
+                "id=" + id +
+                ", isReserved=" + isReserved +
+                ", price=" + price +
+                ", cinemaHallSeat=" + cinemaHallSeat.getId() +
+                ", show=" + show.getId() +
+                ", booking=" + booking.getId() +
+                '}';
     }
 }

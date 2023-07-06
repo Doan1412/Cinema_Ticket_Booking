@@ -44,4 +44,9 @@ public class ShowController {
         showServices.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/movie={id}")
+    public ResponseEntity<List<Show>> getByMovieId(@PathVariable long id){
+        return new ResponseEntity<>(showServices.getByMovieId(id),HttpStatus.OK);
+    }
 }
