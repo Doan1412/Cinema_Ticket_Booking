@@ -1,39 +1,27 @@
 <template>
     <form action="#">
         <h3 class="mb-10 mt-5 text-lg font-medium leading-none text-gray-900 dark:text-white">Show timing selection</h3>
-        <div class="grid gap-4 mb-4 sm:grid-cols-2">
-            <!-- <div>
-            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-            <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username.example" required="">
-        </div>
-        <div>
-            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-            <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
-        </div>
-        <div>
-            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-            <input type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required="">
-        </div>                        <div>
-            <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-            <input type="password" name="confirm-password" id="confirm-password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required="">
-        </div> -->
+        <div class="grid gap-4 mb-20 sm:grid-cols-2">
             <div class="mb-10">
                 <label for="date" class="text-xl mr-20">Choose a Date:</label>
-                <input type="date" id="date" v-model="selectedDate" @change="fetchData" class="custom-date-input" />
+                <input type="date" id="date" v-model="selectedDate" @change="filterShows" class="custom-date-input" />
 
             </div><br>
             <div class="cnt">
                 <label for="date" class="text-xl">Choose a Show:</label>
-                <div class="show-list ">
-                    <button class="show-button" v-for="show in shows" :key="show.id" @click="selectShow(show)">
-                        {{ show.startTime }}
-                    </button>
+                <div class="show-list " v-for="show in showDate" :key="show.id">
+                    <button class="show-button-choice"  @click="selectShow(show); $event.preventDefault()"
+                        :class="{ 'selected': show.selected }" v-if="show == choice">{{ show.startTime.toLocaleTimeString() }}</button>
+                    <button class="show-button" @click="selectShow(show); $event.preventDefault()"
+                        :class="{ 'selected': show.selected }" v-else>{{ show.startTime.toLocaleTimeString() }}</button>
+
                 </div>
             </div>
         </div>
         <button type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Next Step: Payment Info
+            class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 left"
+            @click="submit(); $event.preventDefault()">
+            Next Step: Selete Seats
         </button>
     </form>
 </template>
@@ -45,11 +33,13 @@ export default {
             type: String,
             default: "0",
         },
-        selectedDate: null,
     },
     data() {
         return {
+            selectedDate: null,
             shows: [],
+            showDate: [],
+            choice: null,
         }
     },
     async fetch() {
@@ -61,7 +51,7 @@ export default {
                         id: show.id,
                         createOn: new Date(show.createOn).toLocaleDateString(),
                         duration: show.duration,
-                        startTime: new Date(show.startTime).toLocaleTimeString(),
+                        startTime: new Date(show.startTime),
                     };
                 });
             });
@@ -72,13 +62,16 @@ export default {
     },
     methods: {
         filterShows() {
-            const selectedDate = new Date(this.selectedDate);
+            const selectedDate = new Date(this.$data.selectedDate);
             const filteredShows = this.shows.filter((show) => {
                 const showDate = new Date(show.startTime);
+                console.log(showDate.toDateString() + "/" + selectedDate.toDateString());
                 return showDate.toDateString() === selectedDate.toDateString();
             });
+            console.log(filteredShows);
             // Update the shows array with filteredShows
-            this.shows = filteredShows;
+            this.$data.showDate = filteredShows;
+
         },
         formatDate(date) {
             // Format the date in the desired format (e.g., yyyy-MM-dd) using JavaScript Date methods
@@ -87,11 +80,29 @@ export default {
             const day = String(date.getDate()).padStart(2, '0');
             return `${year}-${month}-${day}`;
         },
+        selectShow(selectedShow) {
+            this.showDate.forEach(show => {
+                show.selected = show === selectedShow;
+            });
+            this.$data.choice = selectedShow;
+        },
+        submit() {
+            console.log(this.choice);
+            if (this.choice==null) {
+                alert('Please choose a Show.');
+                return;
+            }
+            this.$emit("showChoice",this.choice);
+        }
     },
 
 }
 </script>
 <style scoped>
+.selected {
+    background-color: rgb(202, 202, 202);
+}
+
 .cnt {
     width: 1000px;
 }
@@ -123,7 +134,7 @@ export default {
 .show-list {
     display: inline-block;
     margin-left: 75px;
-
+    width: 50px;
 }
 
 .show-button {
@@ -139,4 +150,21 @@ export default {
 
 .show-button:hover {
     background-color: #ccc;
-}</style>
+}
+
+.show-button-choice {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-right: 15px;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.left {
+    margin-left: 650px !important;
+}
+</style>
