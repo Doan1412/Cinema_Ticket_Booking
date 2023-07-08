@@ -1,5 +1,6 @@
 package com.example.cinema_booking_system.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,10 @@ public class CinemaHall {
     Long id;
     String name;
     int capacity;
+    int row;
+    int col;
     @OneToMany(cascade = CascadeType.ALL)
+            @JsonIgnore
     List<CinemaHallSeat> cinemaHallSeat;
+
 }

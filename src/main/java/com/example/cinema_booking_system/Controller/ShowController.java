@@ -30,6 +30,7 @@ public class ShowController {
     }
 
     @GetMapping("/id={id}")
+    @CrossOrigin
     public ResponseEntity<Show> getById(@PathVariable long id){
         return new ResponseEntity<>(showServices.getShowById(id),HttpStatus.OK);
     }

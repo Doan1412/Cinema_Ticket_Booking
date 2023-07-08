@@ -26,6 +26,8 @@ public class CinemaHallService {
         var c= CinemaHall.builder()
                 .name(cinemaHallDto.getName())
                 .capacity(cinemaHallDto.getCapacity())
+                .row(cinemaHallDto.getRow())
+                .col(cinemaHallDto.getCol())
                 .build();
         CinemaHall cinemaHall= cinemaHallRepository.save(c);
         List<CinemaHallSeat> list =new ArrayList<>();

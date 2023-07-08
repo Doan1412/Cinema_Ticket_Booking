@@ -28,10 +28,8 @@ public class Show {
     Movie movie;
     @ManyToOne
     @JoinColumn(name = "cinema_hall_id")
-    @JsonIgnore
     private CinemaHall cinemaHall;
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<ShowSeat> showSeats;
 
     @Override
@@ -43,7 +41,7 @@ public class Show {
                 ", duration=" + duration +
                 ", movie=" + movie.getId() +
                 ", cinemaHall=" + cinemaHall.getId() +
-//                ", showSeats=" + showSeats +
+                ", showSeats=" + showSeats +
                 '}';
     }
 }

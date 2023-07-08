@@ -1,6 +1,7 @@
 package com.example.cinema_booking_system.Model;
 
 import com.example.cinema_booking_system.DataType.SeatType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +20,19 @@ public class CinemaHallSeat {
     private int row;
     private int number;
     @ManyToOne
+    @JsonIgnore
     private CinemaHall cinemaHall;
     @Enumerated(EnumType.STRING)
     private SeatType seatType;
+
+    @Override
+    public String toString() {
+        return "CinemaHallSeat{" +
+                "id=" + id +
+                ", row=" + row +
+                ", number=" + number +
+                ", cinemaHall=" + cinemaHall.getId() +
+                ", seatType=" + seatType +
+                '}';
+    }
 }

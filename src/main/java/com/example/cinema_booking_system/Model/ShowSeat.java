@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-public class ShowSeat extends CinemaHallSeat {
+public class ShowSeat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -18,7 +18,6 @@ public class ShowSeat extends CinemaHallSeat {
     double price;
     @OneToOne
     @JoinColumn(name = "cinema_hall_seat_id")
-    @JsonIgnore
     private CinemaHallSeat cinemaHallSeat;
     @ManyToOne
     @JoinColumn(name = "show_id")
@@ -45,7 +44,7 @@ public class ShowSeat extends CinemaHallSeat {
                 "id=" + id +
                 ", isReserved=" + isReserved +
                 ", price=" + price +
-                ", cinemaHallSeat=" + cinemaHallSeat.getId() +
+                ", cinemaHallSeat=" + cinemaHallSeat +
                 ", show=" + show.getId() +
                 ", booking=" + booking.getId() +
                 '}';
