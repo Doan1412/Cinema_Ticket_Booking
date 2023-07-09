@@ -4,13 +4,11 @@ import com.example.cinema_booking_system.DTO.BookingDTO;
 import com.example.cinema_booking_system.DataType.BookingStatus;
 import com.example.cinema_booking_system.DataType.PaymentStatus;
 import com.example.cinema_booking_system.Model.*;
-import com.example.cinema_booking_system.Repositories.BookingRepository;
-import com.example.cinema_booking_system.Repositories.CustomerRepository;
-import com.example.cinema_booking_system.Repositories.PaymentRepository;
-import com.example.cinema_booking_system.Repositories.ShowRepository;
+import com.example.cinema_booking_system.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,25 +18,33 @@ public class BookingService {
     private final CustomerRepository customerRepository;
     private final BookingRepository bookingRepository;
     private final PaymentRepository paymentRepository;
+    private final ShowSeatRepository showSeatRepository;
 
     @Autowired
     public BookingService(ShowRepository showRepository,CustomerRepository customerRepository,
                           BookingRepository bookingRepository,
-                          PaymentRepository paymentRepository) {
+                          PaymentRepository paymentRepository,
+                          ShowSeatRepository showSeatRepository) {
         this.showRepository = showRepository;
         this.customerRepository = customerRepository;
         this.bookingRepository = bookingRepository;
         this.paymentRepository = paymentRepository;
+        this.showSeatRepository = showSeatRepository;
     }
     public Booking create(BookingDTO bookingDTO){
         Show show = showRepository.findById(bookingDTO.getShowId()).orElseThrow();
         Customer customer = customerRepository.findById(bookingDTO.getCustomerId()).orElseThrow();
+        List<ShowSeat> seats = new ArrayList<>();
+        for (Long seatId: bookingDTO.getListSeatId()) {
+            ShowSeat seat = showSeatRepository.findById(seatId).orElseThrow();
+            seats.add(seat);
+        }
         var booking = Booking.builder()
                 .createOn(bookingDTO.getCreateOn())
                 .status(BookingStatus.CONFIRMED)
                 .show(show)
                 .customer(customer)
-                .showSeats(show.getShowSeats())
+                .showSeats(seats)
                 .build();
         Booking b= bookingRepository.save(booking);
         double a=0;

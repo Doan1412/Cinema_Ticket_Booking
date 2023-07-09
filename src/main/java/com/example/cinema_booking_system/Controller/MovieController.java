@@ -28,6 +28,7 @@ public class MovieController {
         return new ResponseEntity<>(movieServices.getListMovie(), HttpStatus.OK);
     }
     @GetMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<Movie>getMovieById(@PathVariable long id){
         return new ResponseEntity<>(movieServices.getMovieById(id),HttpStatus.OK);
     }

@@ -20,5 +20,5 @@ public class BookingDTO {
 
     //private Long paymentId;
 
-    private List<CinemaHallSeat> seats;
+    private List<Long> listSeatId;
 }
