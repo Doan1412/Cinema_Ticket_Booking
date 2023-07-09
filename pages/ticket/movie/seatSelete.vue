@@ -75,10 +75,10 @@ export default {
         // Seat is reserved, cannot be selected
         return;
       }
-      const index = this.seatChoice.indexOf(seatId);
+      const index = this.seatChoice.indexOf(seatId+1);
       if (index === -1) {
         // Seat is not in the seatChoice array, add it
-        this.seatChoice.push(seatId);
+        this.seatChoice.push(seatId+1);
         this.reserved[seatId] = 2;
       } else {
         // Seat is already in the seatChoice array, remove it
@@ -88,7 +88,7 @@ export default {
       console.log(this.seatChoice);
     },
     getSeatClass(seatId) {
-      if (this.seatChoice.includes(seatId)) {
+      if (this.seatChoice.includes(seatId+1)) {
         return 'choice';
       } else if (this.reserved[seatId]) {
         return 'seat occupied';

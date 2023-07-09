@@ -63,7 +63,7 @@ d="M1 5.917 5.724 10.5 15 1.5" />
             </ol>
             <TimeSelect :movieId="id" @showChoice="handleShowChoice" v-if="step==1" />
             <SeatSelete :show-id="showChoice.id" @listSeat="handleSeatChoice" v-if="step==2" />
-            <Payment v-if="step==3"/>
+            <Payment :listSeat="listSeat" :showId="showChoice.id" :movieId="id" v-if="step==3"/>
         </div>
     </div>
 </template>
