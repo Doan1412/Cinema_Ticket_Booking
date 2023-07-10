@@ -1,17 +1,13 @@
 <template>
     <div class="ctn">
-      <!-- Modal toggle button -->
       <button type="button" @click="toggleModal"
         class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
         Trailer
       </button>
   
-      <!-- Modal -->
       <div v-show="isModalOpen" class="fixed inset-0 z-50 flex items-center justify-center" id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" >
         <div class="relative w-full max-w-6xl">
-          <!-- Modal content -->
           <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
             <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
               <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Trailer</h3>
               <button type="button" @click="toggleModal"
@@ -25,14 +21,12 @@
                 </svg>
               </button>
             </div>
-            <!-- Modal body -->
             <div class="p-6 space-y-6">
               <div class="aspect-w-16 aspect-h-9">
                 <iframe class="absolute inset-0 w-full h-full"
                   :src="url" allowfullscreen></iframe>
               </div>
             </div>
-            <!-- Modal footer -->
             <div class="flex items-center justify-end p-4 border-t dark:border-gray-600">
               <button type="button" @click="toggleModal"
                 class="px-4 py-2 text-sm font-medium text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-800 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
@@ -43,7 +37,6 @@
         </div>
       </div>
   
-      <!-- Backdrop filter -->
       <div v-show="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
     </div>
   </template>

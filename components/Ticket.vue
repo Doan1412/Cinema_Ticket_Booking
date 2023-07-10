@@ -1,7 +1,7 @@
 <template>
-    <div class="ticketForm block">
-        <div class="cardWrap">
-            <div class="card cardLeft">
+    <div class="ticketForm blockk">
+        <div class="carddWrap">
+            <div class="cardd carddLeft">
                 <h1>Startup <span>Cinema</span></h1>
                 <div class="titlee">
                     <h2>{{ moviee?.title }}</h2>
@@ -32,7 +32,7 @@
                     <span>Date</span>
                 </div>
             </div>
-            <div class="card cardRight">
+            <div class="cardd carddRight">
                 <div class="eye"></div>
                 <div class="number">
                     <h3>1</h3>
@@ -110,20 +110,20 @@ export default {
     width: 1000px;
 }
 
-.block {
+.blockk {
     display: block;
     padding-right: 500px;
     margin-bottom: 20px;
 }
 
-.cardWrap {
+.carddWrap {
     width: 50em;
     margin: 3em auto;
     color: #fff;
     font-family: sans-serif;
 }
 
-.card {
+.cardd {
     background: linear-gradient(to bottom, #e84c3d 0%, #e84c3d 26%, #ecedef 26%, #ecedef 100%);
     height: 18em;
     float: left;
@@ -132,13 +132,13 @@ export default {
     margin-top: 100px;
 }
 
-.cardLeft {
+.carddLeft {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
     width: 30em;
 }
 
-.cardRight {
+.carddRight {
     width: 13em;
     border-left: .18em dashed #fff;
     border-top-right-radius: 8px;

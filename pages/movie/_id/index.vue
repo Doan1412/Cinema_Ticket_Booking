@@ -5,12 +5,12 @@
         </div>
         <div class="flex-container">
             <div>
-                <img class="poster" :src="movie.posterUrl">
+                <img class="poster" :src="movie?.posterUrl">
             </div>
             <div class="info">
-                <p class="text-5xl text-gray-900 dark:text-white pb-3">{{ movie.title }}</p>
+                <p class="text-5xl text-gray-900 dark:text-white pb-3">{{ movie?.title }}</p>
                 <div class="flex items-center mt-2.5 mb-7">
-                    <ul v-for="star in getStarRating(movie.rating)" :key="star">
+                    <ul v-for="star in getStarRating(movie?.rating)" :key="star">
                         <svg aria-hidden="true" class="w-6 h-6 text-yellow-300" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <title>First star</title>
@@ -25,22 +25,22 @@
                             movie.rating }}</span>
                 </div>
                 <span class="text-2xl font-medium text-gray-900 dark:text-white pb-7">Genre: </span>
-                <span class="text-2xl font-normal text-gray-900 dark:text-white pb-7"> {{ movie.genre }}</span>
+                <span class="text-2xl font-normal text-gray-900 dark:text-white pb-7"> {{ movie?.genre }}</span>
                 <br>
                 <span class="text-2xl font-medium text-gray-900 dark:text-white pb-7">Actor: </span>
-                <span class="text-2xl font-normal text-gray-900 dark:text-white pb-7"> {{ movie.actorList }}</span>
+                <span class="text-2xl font-normal text-gray-900 dark:text-white pb-7"> {{ movie?.actorList }}</span>
                 <br>
                 <span class="text-2xl font-medium text-gray-900 dark:text-white pb-7">Release day: </span>
-                <span class="text-2xl font-normal text-gray-900 dark:text-white pb-7">{{ movie.releaseDate }}</span>
+                <span class="text-2xl font-normal text-gray-900 dark:text-white pb-7">{{ new Date(movie?.releaseDate).toLocaleDateString() }}</span>
                 <br>
                 <span class="text-2xl font-medium text-gray-900 dark:text-white pb-7">Country: </span>
-                <span class="text-2xl font-normal text-gray-900 dark:text-white pb-7"> {{ movie.country }}</span>
+                <span class="text-2xl font-normal text-gray-900 dark:text-white pb-7"> {{ movie?.country }}</span>
                 <br>
                 <span class="text-2xl font-medium text-gray-900 dark:text-white pb-7">Duration: </span>
-                <span class="text-2xl font-normal text-gray-900 dark:text-white pb-7"> {{ movie.duartionMin }}
+                <span class="text-2xl font-normal text-gray-900 dark:text-white pb-7"> {{ movie?.duartionMin }}
                     minutes</span>
                 <br>
-                <span class="text-2xl font-normal text-gray-900 dark:text-white"> {{ movie.description }}</span>
+                <span class="text-2xl font-normal text-gray-900 dark:text-white"> {{ movie?.description }}</span>
                 <div class="cnt mt-5">
                     <div class='container'>
                         <a class='playBut' @click="playTrailer">
@@ -62,6 +62,7 @@
                         </a>
                     </div>
                     <div>
+                        <a :href="`/ticket/movie/${this.movie.id}`">
                         <button class="button">
                             <span class="button__text">
                                 <span>Buy tickets</span>
@@ -109,6 +110,7 @@
 
                             </svg>
                         </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -116,7 +118,7 @@
         <div v-if="isDisplaying" class="trailer-vid">
             <iframe width="900" height="600" :src="movie.trailerUrl">
             </iframe>
-            <!-- <video :src="movie.trailerUrl" controls width="900" height="600"></video> -->
+            
         </div>
     </div>
 </template>

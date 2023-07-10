@@ -27,6 +27,7 @@ import Sidebar from '~/components/Sidebar.vue';
 import Headerbar from '~/components/Headerbar.vue';
 import TrailerPopup from '~/components/TrailerPopup.vue';
 import CardSlider from '~/components/CardSlider.vue';
+import Slider from '~/components/Slider.vue';
 export default {
   name: "IndexPage",
   components: { Sidebar, TrailerPopup, CardSlider },
