@@ -24,6 +24,7 @@ public class MovieController {
         this.movieRepository = movieRepository;
     }
     @GetMapping()
+    @CrossOrigin
     public ResponseEntity<List<Movie>>getAll(){
         return new ResponseEntity<>(movieServices.getListMovie(), HttpStatus.OK);
     }
@@ -33,15 +34,18 @@ public class MovieController {
         return new ResponseEntity<>(movieServices.getMovieById(id),HttpStatus.OK);
     }
     @PostMapping("/new")
+    @CrossOrigin
     public ResponseEntity<Movie>createMovie(@RequestBody Movie movie){
         return new ResponseEntity<>(movieServices.create(movie),HttpStatus.CREATED);
     }
     @DeleteMapping("/delete/{id}")
+    @CrossOrigin
     public void deleteMovie(@PathVariable long id){
         movieServices.delete(id);
         return;
     }
-    @PatchMapping("/update")
+    @PutMapping("/update")
+    @CrossOrigin
     public ResponseEntity<Movie>updateMovie(@RequestBody Movie movie){
         return new ResponseEntity<>(movieServices.update(movie),HttpStatus.OK);
     }
