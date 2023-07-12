@@ -23,7 +23,7 @@
                                 <p class="text-gray-100 font-normal text-md pl-2 inline-block pb-1">| 1055</p>
                                 <p class="text-gray-150 font-normal text-sm pl-10 inline-block pb-1">{{ movie.duartionMin }}
                                     m
-                                    &bull; {{ movie.genre }} &bull; {{ movie.releaseDate }}</p>
+                                    &bull; {{ movie.genre }} &bull; {{ new Date(movie.releaseDate).toLocaleDateString()  }}</p>
                                 <p class="text-white font-normal text-lg pt-5 content">{{ movie.description }}</p>
                             </div>
                             <div class="pt-5">

@@ -3017,6 +3017,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/devtools-api@npm:^6.5.0":
+  version: 6.5.0
+  resolution: "@vue/devtools-api@npm:6.5.0"
+  checksum: ec819ef3a426e91d09e9cfefd2827e9ed8ec9d62bb3b3e0674f3da8c7e92a4b879c3b777dc7329172ca6fe2670b62dd5580d23160339208f0f5ae038f2e504ad
+  languageName: node
+  linkType: hard
+
 "@vuepic/vue-datepicker@npm:^5.4.0":
   version: 5.4.0
   resolution: "@vuepic/vue-datepicker@npm:5.4.0"
@@ -3239,6 +3246,7 @@ __metadata:
     nuxt: ^2.15.8
     postcss: ^8.4.17
     prettier: ^2.7.1
+    vee-validate: ^4.10.6
     vue: ^2.7.10
     vue-server-renderer: ^2.7.10
     vue-slick-carousel: ^1.0.6
@@ -12610,6 +12618,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"type-fest@npm:^3.12.0":
+  version: 3.13.0
+  resolution: "type-fest@npm:3.13.0"
+  checksum: f7be142ae1ad0582eafd52d085350799c8cd918c15455896a06c82c147b61f8cea58892bedf1348943478e37740562219375b3b59fd855db99cd2b2766510f98
+  languageName: node
+  linkType: hard
+
 "type-is@npm:^1.6.16":
   version: 1.6.18
   resolution: "type-is@npm:1.6.18"
@@ -13015,6 +13030,18 @@ __metadata:
   version: 1.1.2
   resolution: "vary@npm:1.1.2"
   checksum: ae0123222c6df65b437669d63dfa8c36cee20a504101b2fcd97b8bf76f91259c17f9f2b4d70a1e3c6bbcee7f51b28392833adb6b2770b23b01abec84e369660b
+  languageName: node
+  linkType: hard
+
+"vee-validate@npm:^4.10.6":
+  version: 4.10.6
+  resolution: "vee-validate@npm:4.10.6"
+  dependencies:
+    "@vue/devtools-api": ^6.5.0
+    type-fest: ^3.12.0
+  peerDependencies:
+    vue: ^3.3.4
+  checksum: 309c6766b83cf663493767a5e992c4cfb7533881f4eee097a1c4538a7e47be05a919d59f1fbb942bb49b8a8d4d0c92c32a7db799ff81ed2aee260d38467798dc
   languageName: node
   linkType: hard
 

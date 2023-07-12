@@ -40,7 +40,7 @@ export default {
   padding: 20px 25px;
   border-radius: 10px;
   position: fixed;
-  z-index: 90;
+  z-index: 100;
   top: -400px;
   left: 19%;
   box-shadow: 3px 3px 10px 3px rgb(129, 129, 129);

@@ -167,12 +167,12 @@
 </style>
 <script>
 export default{
-    props:{
-        movies: {
-        type: Array,
-        default: () => [],
-    },
-    },
+    // props:{
+    //     movies: {
+    //     type: Array,
+    //     default: () => [],
+    // },
+    // },
     methods: {
 
     }
