@@ -22,9 +22,9 @@ public class Show {
     private LocalDateTime createOn;
     private LocalDateTime startTime;
     private int duration;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "movie_id")
-            @JsonIgnore
+//            @JsonIgnore
     Movie movie;
     @ManyToOne
     @JoinColumn(name = "cinema_hall_id")

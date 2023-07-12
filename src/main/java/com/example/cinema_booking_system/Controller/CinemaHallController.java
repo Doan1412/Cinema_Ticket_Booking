@@ -19,25 +19,30 @@ public class CinemaHallController {
     }
 
     @GetMapping("/all")
+    @CrossOrigin
     public ResponseEntity<List<CinemaHall>> getAll(){
         return new ResponseEntity<>(cinemaHallService.getList(), HttpStatus.OK);
     }
 
     @GetMapping("/id={id}")
+    @CrossOrigin
     public ResponseEntity<CinemaHall> get(@PathVariable long id){
         return new ResponseEntity<>(cinemaHallService.getById(id),HttpStatus.OK);
     }
     @PostMapping("/new")
+    @CrossOrigin
     public ResponseEntity<CinemaHall> create(@RequestBody CinemaHall cinemaHall){
         return new ResponseEntity<>(cinemaHallService.create(cinemaHall),HttpStatus.CREATED);
     }
 
     @PatchMapping("/update")
+    @CrossOrigin
     public ResponseEntity<CinemaHall> update(@RequestBody long id, String name){
         return new ResponseEntity<>(cinemaHallService.updateName(id,name),HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/id={id}")
+    @CrossOrigin
     public ResponseEntity<Void> delete(@PathVariable long id){
         cinemaHallService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);

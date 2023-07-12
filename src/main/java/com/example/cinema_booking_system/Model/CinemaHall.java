@@ -24,7 +24,7 @@ public class CinemaHall {
     int row;
     int col;
     @OneToMany(cascade = CascadeType.ALL)
-            @JsonIgnore
+//            @JsonIgnore
     List<CinemaHallSeat> cinemaHallSeat;
 
 }

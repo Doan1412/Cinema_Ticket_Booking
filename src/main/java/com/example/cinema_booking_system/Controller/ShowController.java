@@ -25,6 +25,7 @@ public class ShowController {
         return new ResponseEntity<>(showServices.getList(), HttpStatus.OK);
     }
     @PostMapping("/create")
+    @CrossOrigin
     public ResponseEntity<Show> create (@RequestBody ShowDTO showDTO){
         return new ResponseEntity<>(showServices.create(showDTO),HttpStatus.CREATED);
     }
@@ -41,6 +42,7 @@ public class ShowController {
     }
 
     @DeleteMapping("/delete/id={id}")
+    @CrossOrigin
     public ResponseEntity<Void> delete(@PathVariable long id){
         showServices.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);

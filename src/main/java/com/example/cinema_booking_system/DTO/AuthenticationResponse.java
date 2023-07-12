@@ -1,6 +1,7 @@
 package com.example.cinema_booking_system.DTO;
 
 import com.example.cinema_booking_system.DataType.Role;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -18,9 +19,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthenticationResponse {
+    @JsonProperty("access_token")
     private String accessToken;
+    @JsonProperty("refresh_token")
     private String refreshToken;
-    private Long expiryDuration;
-    @Enumerated(EnumType.STRING)
-    private Role role;
 }
