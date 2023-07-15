@@ -28,7 +28,9 @@ Các chức năng chung :
   ![image](https://github.com/Doan1412/Cinema_Ticket_Booking/assets/85919961/6e43bd09-5b9e-498f-8384-cc167c5c5724)
 
   -Logout
+  
 Người dùng là khách hàng
+
   -Xem danh sách các phim đang chiếu
   ![image](https://github.com/Doan1412/Cinema_Ticket_Booking/assets/85919961/3349a3c0-c03f-40f6-b43f-66c385378ac4)
 
