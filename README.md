@@ -1,6 +1,7 @@
 # Cinema_Ticket_Booking
 
 Giới thiệu
+
 Tên project : Cinema_Ticket_Booking
 Chức năng chính: Đặt vé xem phim online
 Công nghệ : Backend: Spring Boot (branch master)
