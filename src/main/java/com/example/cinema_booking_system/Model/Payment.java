@@ -21,7 +21,7 @@ public class Payment {
     @OneToOne(fetch = FetchType.LAZY)
     private Booking booking;
     private double amount;
-    private LocalDateTime paymentDate;
+    private Date paymentDate;
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
 
@@ -49,11 +49,11 @@ public class Payment {
         this.amount = amount;
     }
 
-    public LocalDateTime getPaymentDate() {
+    public Date getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(LocalDateTime paymentDate) {
+    public void setPaymentDate(Date paymentDate) {
         this.paymentDate = paymentDate;
     }
 

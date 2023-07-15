@@ -5,10 +5,10 @@ import com.example.cinema_booking_system.DTO.AuthenticationRequest;
 import com.example.cinema_booking_system.DTO.AuthenticationResponse;
 import com.example.cinema_booking_system.DTO.RegisterRequest;
 import com.example.cinema_booking_system.DataType.AccountStatus;
-import com.example.cinema_booking_system.Model.Account;
-import com.example.cinema_booking_system.Model.Person;
-import com.example.cinema_booking_system.Model.Token;
+import com.example.cinema_booking_system.DataType.Role;
+import com.example.cinema_booking_system.Model.*;
 import com.example.cinema_booking_system.Repositories.AccountRepository;
+import com.example.cinema_booking_system.Repositories.CustomerRepository;
 import com.example.cinema_booking_system.Repositories.PersonRepository;
 import com.example.cinema_booking_system.Repositories.TokenRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +33,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final PersonRepository personRepository;
     private final AccountRepository accountRepository;
+    private final CustomerRepository customerRepository;
 
     public AuthenticationResponse register(RegisterRequest request) {
         var person = Person.builder()
@@ -51,9 +53,18 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
+        if (savedUser.getRole()== Role.CUSTOMER){
+            var c = Customer.builder()
+                    .account(savedUser)
+                    .bookings(new ArrayList<Booking>())
+                    .build();
+            var saveCustomer = customerRepository.save(c);
+        }
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
+                .name(user.getPerson().getName())
+                .role(user.getRole())
                 .build();
     }
 
@@ -73,6 +84,8 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
+                .name(user.getPerson().getName())
+                .role(user.getRole())
                 .build();
     }
 
@@ -120,6 +133,8 @@ public class AuthenticationService {
                 var authResponse = AuthenticationResponse.builder()
                         .accessToken(accessToken)
                         .refreshToken(refreshToken)
+                        .name(user.getPerson().getName())
+                        .role(user.getRole())
                         .build();
                 new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
             }

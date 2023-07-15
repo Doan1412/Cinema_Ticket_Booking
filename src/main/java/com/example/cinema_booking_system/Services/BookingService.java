@@ -19,25 +19,32 @@ public class BookingService {
     private final BookingRepository bookingRepository;
     private final PaymentRepository paymentRepository;
     private final ShowSeatRepository showSeatRepository;
+    private final AccountRepository accountRepository;
 
     @Autowired
     public BookingService(ShowRepository showRepository,CustomerRepository customerRepository,
                           BookingRepository bookingRepository,
                           PaymentRepository paymentRepository,
-                          ShowSeatRepository showSeatRepository) {
+                          ShowSeatRepository showSeatRepository,
+                          AccountRepository accountRepository) {
         this.showRepository = showRepository;
         this.customerRepository = customerRepository;
         this.bookingRepository = bookingRepository;
         this.paymentRepository = paymentRepository;
         this.showSeatRepository = showSeatRepository;
+        this.accountRepository = accountRepository;
     }
-    public Booking create(BookingDTO bookingDTO){
+    public BookingDTO create(BookingDTO bookingDTO){
         Show show = showRepository.findById(bookingDTO.getShowId()).orElseThrow();
-        Customer customer = customerRepository.findById(bookingDTO.getCustomerId()).orElseThrow();
+        Customer customer = customerRepository.findByAccountUsername(bookingDTO.getUsername()).orElseThrow();
+//        System.out.println(customer);
+        //Customer customer = customerRepository.findById(bookingDTO.getCustomerId()).orElseThrow();
         List<ShowSeat> seats = new ArrayList<>();
         for (Long seatId: bookingDTO.getListSeatId()) {
             ShowSeat seat = showSeatRepository.findById(seatId).orElseThrow();
             seats.add(seat);
+            seat.setReserved(true);
+            showSeatRepository.save(seat);
         }
         var booking = Booking.builder()
                 .createOn(bookingDTO.getCreateOn())
@@ -47,6 +54,9 @@ public class BookingService {
                 .showSeats(seats)
                 .build();
         Booking b= bookingRepository.save(booking);
+        List<Booking> lb= customer.getBookings();
+        lb.add(b);
+        customer.setBookings(lb);
         double a=0;
         for (ShowSeat showSeat: b.getShowSeats()) {
             a+=showSeat.getPrice();
@@ -58,8 +68,10 @@ public class BookingService {
                 .booking(b)
                 .build();
         Payment p = paymentRepository.save(payment);
-        b.setPayment(p);
-        return bookingRepository.save(b);
+        bookingDTO.setId(b.getId());
+//        bookingDTO.setPaymentId(b.getPayment().getId());
+//        b.setPayment(p);
+        return bookingDTO;
     }
     public Booking getById(long id){
         return bookingRepository.findById(id).orElseThrow();
@@ -76,5 +88,25 @@ public class BookingService {
     }
     public void deteleBooking(long id){
         bookingRepository.deleteById(id);
+    }
+
+    public List<BookingDTO> getListBookingByUsername(String username) {
+        Customer customer = customerRepository.findByAccountUsername(username).orElseThrow();
+        List<Booking> list = bookingRepository.findByCustomer(customer);
+        List<BookingDTO> res = new ArrayList<>();
+        for (Booking b: list) {
+            List<Long> listSeatId = new ArrayList<>();
+            for (ShowSeat showSeat : b.getShowSeats()){
+                listSeatId.add(showSeat.getId());
+            }
+            var booking = BookingDTO.builder()
+                    .showId(b.getShow().getId())
+                    .status(b.getStatus())
+                    .listSeatId(listSeatId)
+                    .movie(b.getShow().getMovie().getId())
+                    .build();
+            res.add(booking);
+        }
+        return res;
     }
 }

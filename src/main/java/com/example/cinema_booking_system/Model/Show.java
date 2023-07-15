@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -19,8 +20,8 @@ public class Show {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime createOn;
-    private LocalDateTime startTime;
+    private Date createOn;
+    private Date startTime;
     private int duration;
     @ManyToOne
     @JoinColumn(name = "movie_id")

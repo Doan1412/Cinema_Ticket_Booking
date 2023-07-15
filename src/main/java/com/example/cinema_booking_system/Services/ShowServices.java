@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +36,7 @@ public class ShowServices {
         List<Show> overlappingShows = new ArrayList<>();
         if (allShows.isEmpty()) return overlappingShows;
         for (Show show : allShows) {
-            LocalDateTime showStartTime = show.getStartTime();
+            LocalDateTime showStartTime = show.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();;
             if (showStartTime == null) continue; // Skip iteration if showStartTime is null
             LocalDateTime showEndTime = showStartTime.plusMinutes(show.getMovie().getDuartionMin());
 
@@ -57,7 +58,7 @@ public class ShowServices {
     public Show create(ShowDTO showDTO){
         Movie movie = movieRepository.findById(showDTO.getMovieId()).orElseThrow();
         CinemaHall cinemaHall = cinemaHallRepository.findById(showDTO.getCinemaHallId()).orElseThrow();
-        if (!isShowOverlap(cinemaHall,showDTO.getStartTime(),showDTO.getStartTime().plusMinutes(movie.getDuartionMin()))){
+        if (!isShowOverlap(cinemaHall,showDTO.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),showDTO.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime().plusMinutes(movie.getDuartionMin()))){
             var show = Show.builder()
                     .startTime(showDTO.getStartTime())
                     .createOn(showDTO.getCreateOn())
@@ -90,6 +91,15 @@ public class ShowServices {
         return showRepository.findById(id).orElseThrow();
     }
     public void delete(long id){
+        Show s = showRepository.findById(id).orElseThrow();
+        List<Movie> movies = movieRepository.findByListShow(s);
+        for (Movie m:
+             movies) {
+            List<Show> shows= m.getListShow();
+            shows.remove(s);
+            m.setListShow(shows);
+            movieRepository.save(m);
+        }
         showRepository.deleteById(id);
         return;
     }

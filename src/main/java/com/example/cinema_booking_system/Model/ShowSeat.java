@@ -46,7 +46,7 @@ public class ShowSeat {
                 ", price=" + price +
                 ", cinemaHallSeat=" + cinemaHallSeat +
                 ", show=" + show.getId() +
-                ", booking=" + booking.getId() +
+//                ", booking=" + booking != null ? String.valueOf(booking.getId()) : "null" +
                 '}';
     }
 }

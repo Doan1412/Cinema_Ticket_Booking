@@ -14,15 +14,16 @@ import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
 public class ShowDTO {
     Long id;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
-    LocalDateTime createOn;
+    Date createOn;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
-    private LocalDateTime startTime;
+    private Date startTime;
     private int duration;
     Long movieId;
     private Long cinemaHallId;

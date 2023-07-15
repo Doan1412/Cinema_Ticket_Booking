@@ -25,7 +25,7 @@ public class BookingController {
         this.bookingRepository = bookingRepository;
     }
     @PostMapping("/create")
-    public ResponseEntity<Booking> createBooking(@RequestBody BookingDTO bookingDTO){
+    public ResponseEntity<BookingDTO> createBooking(@RequestBody BookingDTO bookingDTO){
         return new ResponseEntity<>(bookingService.create(bookingDTO), HttpStatus.CREATED);
     }
     @DeleteMapping("/delete/{id}")
@@ -39,6 +39,10 @@ public class BookingController {
     @GetMapping("/customerId={id}")
     public ResponseEntity<List<Booking>> getListBookingByCustomerId(@PathVariable long id){
         return new ResponseEntity<>(bookingService.getListBookingByCustomer(id),HttpStatus.OK);
+    }
+    @GetMapping("/username={username}")
+    public ResponseEntity<List<BookingDTO>> getListBookingByUsername(@PathVariable String username){
+        return new ResponseEntity<>(bookingService.getListBookingByUsername(username),HttpStatus.OK);
     }
     @GetMapping("/Id={id}")
     public ResponseEntity<Booking> getById(@PathVariable long id){
