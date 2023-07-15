@@ -73,6 +73,9 @@ import SeatSelete from './seatSelete.vue';
 import Payment from './payment.vue';
 import Ticket from './ticket.vue';
 export default {
+    watch: {
+    '$route.query': '$fetch'
+  },
     data() {
         return {
             id: null,

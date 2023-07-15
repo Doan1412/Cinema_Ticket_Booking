@@ -6,11 +6,14 @@
             </div>
         </div>
         <button type="submit"
-        class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 left2"
-        @click="submitt">
-        Confirm
-    </button>
-</div>
+            class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 left2"
+            @click="submitt">
+            Confirm
+        </button>
+        <Notification :status="status" :object="'tài khoản'" :action="'Đăng nhập'" :isShowNoti="showNoti"
+            v-if="showNoti == 'Ok'">
+        </Notification>
+    </div>
 </template>
 <script>
 import Credit from '~/components/Credit.vue';
@@ -34,6 +37,7 @@ export default {
         return {
             isShowPopup: false,
             show: null,
+            booking: {},
         };
     },
     async fetch() {
@@ -50,12 +54,28 @@ export default {
             this.isShowPopup = false;
         },
         async submitt() {
-            console.log(this.$data.show.id + " " + this.listSeat);
+            this.booking.showId = this.showId;
+            this.booking.username = localStorage.getItem('username');
+            this.booking.createOn = new Date().toISOString();
+            this.booking.listSeatId = this.listSeat;
+            console.log(JSON.stringify(this.booking));
             try {
-                // await this.$axios.$post.
+                console.log(this.booking);
+                await this.$axios.post("http://localhost:8080/api/booking/create", this.booking).then((response) => {
+                    this.status = "thành công";
+                    this.showNoti = "Ok";
+                    setTimeout(() => {
+                        this.showNoti = "";
+                    }, 1500);
+                })
             }
             catch (error) {
                 console.log(error);
+                this.status = "thất bại";
+                this.showNoti = "Ok";
+                setTimeout(() => {
+                    this.showNoti = "";
+                }, 1500);
             }
         }
     },
@@ -63,7 +83,6 @@ export default {
 }
 </script>
 <style>
-
 .ctn3 {
     margin-top: 20px;
     width: 1000px;

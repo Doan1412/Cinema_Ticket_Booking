@@ -2,7 +2,7 @@
     <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800">
         <div class="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
             <div class="flex items-center justify-center h-25 font text-2xl font-bold pt-10">
-                <a href="#" class="flex items-left">
+                <a href="/admin" class="flex items-left">
                     <div>Netflix</div>
                     <div class="text-red-600">.</div>
                 </a>
@@ -15,7 +15,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="/"
+                        <a href="/admin/cinemaHall"
                             class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -25,11 +25,11 @@
                                     </path>
                                 </svg>
                             </span>
-                            <span class="ml-2 text-sm tracking-wide truncate">Home</span>
+                            <span class="ml-2 text-sm tracking-wide truncate">Cinema Hall</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/ticket"
+                        <a href="/admin/show"
                             class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -39,13 +39,13 @@
                                     </path>
                                 </svg>
                             </span>
-                            <span class="ml-2 text-sm tracking-wide truncate">Booking history</span>
+                            <span class="ml-2 text-sm tracking-wide truncate">Show</span>
                             <span
                                 class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-green-500 bg-green-50 rounded-full">15</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="/admin/movie"
                             class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -55,7 +55,7 @@
                                     </path>
                                 </svg>
                             </span>
-                            <span class="ml-2 text-sm tracking-wide truncate">Messages</span>
+                            <span class="ml-2 text-sm tracking-wide truncate">Movie</span>
                         </a>
                     </li>
                     <li>
@@ -83,31 +83,8 @@
                         <a href="/movie"
                             class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                             <span class="inline-flex justify-center items-center ml-4">
-                                <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve"
-                                    width="20px" height="20px" fill="#000000">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <style type="text/css">
-                                            .st0 {
-                                                fill: none;
-                                                stroke: #000000;
-                                                stroke-width: 2;
-                                                stroke-linecap: round;
-                                                stroke-linejoin: round;
-                                                stroke-miterlimit: 10;
-                                            }
-                                        </style>
-                                        <path class="st0"
-                                            d="M31,26L31,26c-9.8-2.6-20.2-2.6-30,0l0,0V6l0,0c9.8,2.6,20.2,2.6,30,0l0,0V26z">
-                                        </path>
-                                        <path class="st0"
-                                            d="M13,13V19c0,0.7,0.9,1.2,1.5,0.8l5-3c0.6-0.4,0.6-1.2,0-1.6l-5-3C13.9,11.7,13,12.2,13,13z">
-                                        </path>
-                                    </g>
-                                </svg>
-
+                                <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve" width="20px" height="20px" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;} </style> <path class="st0" d="M31,26L31,26c-9.8-2.6-20.2-2.6-30,0l0,0V6l0,0c9.8,2.6,20.2,2.6,30,0l0,0V26z"></path> <path class="st0" d="M13,13V19c0,0.7,0.9,1.2,1.5,0.8l5-3c0.6-0.4,0.6-1.2,0-1.6l-5-3C13.9,11.7,13,12.2,13,13z"></path> </g></svg>
+                                
                             </span>
                             <span class="ml-2 text-sm tracking-wide truncate">Now showing</span>
                         </a>
@@ -119,11 +96,11 @@
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8V12L14 14M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z">
+                                    d="M12 8V12L14 14M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z">
                                     </path>
-
+                                    
                                 </svg>
-
+                                
                             </span>
                             <span class="ml-2 text-sm tracking-wide truncate">Comming Soon</span>
                             <span
@@ -183,11 +160,13 @@
         </div>
     </div>
 </template>
-<style>.font {
+<style>
+.font {
     font-family: 'Nunito', sans-serif;
-}</style>
+}
+</style>
 <script>
-export default {
+export default{
     methods: {
         async logout() {
             try {

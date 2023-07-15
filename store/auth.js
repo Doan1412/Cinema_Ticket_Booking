@@ -14,9 +14,10 @@ export const AUTH_MUTATIONS = {
   
   export const mutations = {
     // store the logged in user in the state
-    [AUTH_MUTATIONS.SET_USER] (state, { id, username }) {
-      state.id = id
+    [AUTH_MUTATIONS.SET_USER] (state, { name, username, role }) {
+      state.name = name
       state.username = username
+      state.role = role
     },
   
     // store new or updated token fields in the state
@@ -31,8 +32,9 @@ export const AUTH_MUTATIONS = {
   
     // clear our the state, essentially logging out the user
     [AUTH_MUTATIONS.LOGOUT] (state) {
-      state.id = null
+      state.name = null
       state.username = null
+      state.role = null
       state.access_token = null
       state.refresh_token = null
     },
@@ -41,26 +43,42 @@ export const AUTH_MUTATIONS = {
   export const actions = {
     async login ({ commit, dispatch }, { username, password }) {
       // make an API call to login the user with an email address and password
-      const { data: { data: { user, payload } } } = await this.$axios.post(
-        'http://localhost:8080/api/v1/auth/authenticate', 
-        { username, password }
-      )
-      
+      const { data } = await this.$axios.post('http://localhost:8080/api/v1/auth/authenticate', { username, password });
+      localStorage.setItem('username',username);
       // commit the user and tokens to the state
-      commit(AUTH_MUTATIONS.SET_USER, user)
-      commit(AUTH_MUTATIONS.SET_PAYLOAD, payload)
+      commit(AUTH_MUTATIONS.SET_USER, {
+        username: 'string',
+        name : data.name,
+        role : data.role,
+      });
+      // commit(AUTH_MUTATIONS.SET_PAYLOAD, payload)
+      commit(AUTH_MUTATIONS.SET_PAYLOAD, {
+        access_token: data.access_token,
+        refresh_token: data.refresh_token
+      });
+      // if(data.role == 'admin') this.$route.push('/admin')
+      // else this.$route.push('/')
     },
   
     async register ({ commit }, { name, email, phone, username, password, roles }) {
       // make an API call to register the user
-      const { data: { data: { user, payload } } } = await this.$axios.post(
+      const { data } = await this.$axios.post(
         'http://localhost:8080/api/v1/auth/register', 
         { name, email, phone, username, password, roles }
       )
       
       // commit the user and tokens to the state
-      commit(AUTH_MUTATIONS.SET_USER, user)
-      commit(AUTH_MUTATIONS.SET_PAYLOAD, payload)
+      // commit(AUTH_MUTATIONS.SET_USER, user)
+      commit(AUTH_MUTATIONS.SET_USER, {
+        username: username,
+        name : data.name,
+        role : data.role,
+      });
+      // commit(AUTH_MUTATIONS.SET_PAYLOAD, payload)
+      commit(AUTH_MUTATIONS.SET_PAYLOAD, {
+        access_token: data.access_token,
+        refresh_token: data.refresh_token
+      });
     },
   
     // given the current refresh token, refresh the user's access token to prevent expiry
@@ -69,20 +87,39 @@ export const AUTH_MUTATIONS = {
   
       // make an API call using the refresh token to generate a new access token
       const { data: { data: { payload } } } = await this.$axios.post(
-        'http://localhost:8080/api/v1/auth/refresh', 
+        'http://localhost:8080/api/v1/auth/refresh-token', 
         { refresh_token }
       )
   
-      commit(AUTH_MUTATIONS.SET_PAYLOAD, payload)
+      commit(AUTH_MUTATIONS.SET_USER, {
+        username: username,
+        name : data.name,
+        role : data.role,
+      });
+      // commit(AUTH_MUTATIONS.SET_PAYLOAD, payload)
+      commit(AUTH_MUTATIONS.SET_PAYLOAD, {
+        access_token: data.access_token,
+        refresh_token: data.refresh_token
+      });
     },
   
     // logout the user
-    logout ({ commit, state }) {
-      commit(AUTH_MUTATIONS.LOGOUT)
+    async logout ({ commit, state }) {
+      try {
+        await this.$axios.get("http://localhost:8080/api/v1/auth/logout");
+        commit(AUTH_MUTATIONS.LOGOUT)
+        localStorage.removeItem('username')  // remove from local storage as well for security reasons
+        
+      } catch (error) {
+        console.log(error);
+      }
     },
   }
   
   export const getters = {
+    getUsername: (state) => {
+      return state.username;
+    },
     // determine if the user is authenticated based on the presence of the access token
     isAuthenticated: (state) => {
       return state.access_token && state.access_token !== ''

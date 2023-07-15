@@ -23,7 +23,10 @@ export default {
     methods: {
         submit() {
             this.$emit("step",4);
-        }
+        },
+        closePopup() {
+            this.isShowPopup = false;
+        },
     },
     components: { Credit, PopupConfirm }
 }

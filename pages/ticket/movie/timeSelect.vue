@@ -54,6 +54,7 @@ export default {
                         startTime: new Date(show.startTime),
                     };
                 });
+                // console.log(this.shows);
             });
         }
         catch (error) {
@@ -65,6 +66,7 @@ export default {
             const selectedDate = new Date(this.$data.selectedDate);
             const filteredShows = this.shows.filter((show) => {
                 const showDate = new Date(show.startTime);
+                // console.log(showDate);
                 console.log(showDate.toDateString() + "/" + selectedDate.toDateString());
                 return showDate.toDateString() === selectedDate.toDateString();
             });

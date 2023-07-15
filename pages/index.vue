@@ -11,10 +11,10 @@
         <!-- <div class="img-wrapper">
           <img src="https://i0.wp.com/writertherapy.com/wp-content/uploads/2020/03/Joker-2019-Movie-banner-spread.jpg?fit=1024%2C576&ssl=1" alt="" class="flex rounded-2xl align-middle opacity-90">
         </div> -->
-        <Slider :movies="this.$data.listMovieAd"/>
+        <Slider/>
         <div class="mt-10">
           <span class="ml-11 text-2xl text-gray-600 dark:text-white font-medium">Now showing</span>
-          <CardSlider :listMovie="listNowShow"/>
+          <CardSlider/>
         </div>
       </div>
     </div>
@@ -28,32 +28,19 @@ import Headerbar from '~/components/Headerbar.vue';
 import TrailerPopup from '~/components/TrailerPopup.vue';
 import CardSlider from '~/components/CardSlider.vue';
 import Slider from '~/components/Slider.vue';
+import authenticated from '~/middleware/authenticated.js';
 export default {
   name: "IndexPage",
   components: { Sidebar, TrailerPopup, CardSlider },
+  watch: {
+    '$route.query': '$fetch'
+  },
   data() {
     return {
-      listMovieAd: [],
-      listNowShow: [],
     };
   },
   methods: {
   },
-  async fetch() {
-    try {
-      let url = `http://localhost:8080/api/movie/isAdvertise`;
-      await this.$axios.get(url).then((response) => {
-        this.$data.listMovieAd = response.data;
-      })
-      await this.$axios.get(`http://localhost:8080/api/movie`).then((res) =>{
-        this.$data.listNowShow = res.data;
-      })
-      // const response = await this.$axios.get(url);
-      // this.$data.listMovieAd = response.data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
 }
 
 </script>

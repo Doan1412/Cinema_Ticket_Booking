@@ -8,13 +8,11 @@ export const actions = {
       if (access_token && refresh_token) {
         try {
           // refresh the access token
-          await dispatch('http://localhost:8080/api/v1/auth/refresh-token')
+          await dispatch('/api/v1/auth/refresh-token')
         } catch (e) {
           // catch any errors and automatically logout the user
-          await dispatch('http://localhost:8080/api/v1/auth/logout')
+          await dispatch('/api/v1/auth/logout')
         }
       }
     },
   }
-  // ...
-  

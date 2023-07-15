@@ -35,11 +35,11 @@
             <div class="cardd carddRight">
                 <div class="eye"></div>
                 <div class="number">
-                    <h3>1</h3>
+                    <h3>{{ seat?.cinemaHallSeat.row }}</h3>
                     <span>row</span>
                 </div>
                 <div class="number">
-                    <h3>1</h3>
+                    <h3>{{ seat?.cinemaHallSeat.number }}</h3>
                     <span>seat</span>
                 </div>
                 <div class="barcode"></div>

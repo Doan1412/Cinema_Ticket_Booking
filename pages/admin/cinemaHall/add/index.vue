@@ -1,7 +1,7 @@
 <template>
     <div class="2xl:container md:mx-auto flex flex-row bg-gray-50">
         <div class="basis-1/5">
-            <Sidebar />
+            <AdminSidebar />
         </div>
         <div class="class-list basis-5/6 mt-10 bg-gray-50">
             <h2 class="app-title">Submit a Cinema Hall</h2>
@@ -73,6 +73,7 @@
     </div>
 </template>
 <script>
+import AdminSidebar from '~/components/AdminSidebar.vue';
 export default {
     data() {
         return {

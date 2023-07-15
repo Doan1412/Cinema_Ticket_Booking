@@ -126,6 +126,9 @@
 <script>
 import Headerbar from '~/components/Headerbar.vue';
 export default {
+    watch: {
+    '$route.query': '$fetch'
+  },
     data() {
         return {
             id: null,

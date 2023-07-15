@@ -1,7 +1,7 @@
 <template>
     <div class="2xl:container md:mx-auto flex flex-row bg-gray-50">
         <div class="basis-1/5">
-            <Sidebar />
+            <AdminSidebar />
         </div>
         <div class="class-list basis-5/6 mt-10 bg-gray-50">
             <h2 class="app-title">List show</h2>
@@ -55,7 +55,7 @@
     </div>
 </template>
 <script>
-import Sidebar from '~/components/Sidebar.vue';
+import AdminSidebar from '~/components/AdminSidebar.vue';
 export default {
     data() {
         return {
@@ -63,14 +63,15 @@ export default {
             isShowPopupDelete: false,
             status: "",
             showNoti: "",
-            updatedStatus: '',
-            isShowPopup: ''
-        }
+            updatedStatus: "",
+            isShowPopup: ""
+        };
     },
     async fetch() {
         await this.$axios.get("http://localhost:8080/api/show/all").then((response) => {
             this.items = response.data;
-        })
+            // console.log(this.items);
+        });
     },
     methods: {
         closePopup() {
@@ -90,12 +91,14 @@ export default {
                     setTimeout(() => {
                         this.showNoti = "";
                     }, 1500);
-                })
-            } catch (error) {
-                console.log(error)
+                });
+            }
+            catch (error) {
+                console.log(error);
             }
         }
-    }
+    },
+    components: { AdminSidebar }
 }
 </script>
 <style>

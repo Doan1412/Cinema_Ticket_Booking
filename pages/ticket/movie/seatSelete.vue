@@ -44,6 +44,7 @@
         col: null,
         reserved: [],
         seatChoice: [],
+        listId: [],
       }
     },
     async fetch() {
@@ -65,32 +66,36 @@
       setListReserved() {
         this.reserved = Array(this.show.cinemaHall.capacity)
           .fill(0);
+        this.listId = Array(this.show.cinemaHall.capacity).fill(0);
+        let i=0;
         for (const seat of this.show.showSeats) {
-          seat.reserved ? this.reserved[seat.id] = 1 : this.reserved[seat.id] = 0;
-          // this.reserved[0] = 2;
+          this.listId [i] = seat.id;
+          seat.reserved ? this.reserved[this.listId[i]] = 1 : this.reserved[this.listId[i]] = 0;
+          i++;
         }
+        console.log(this.listId);
       },
       toggleSeat(seatId) {
-        if (this.reserved[seatId] == 1) {
+        if (this.reserved[this.listId[seatId]] == 1) {
           // Seat is reserved, cannot be selected
           return;
         }
-        const index = this.seatChoice.indexOf(seatId+1);
+        const index = this.seatChoice.indexOf(this.listId[seatId]);
         if (index === -1) {
           // Seat is not in the seatChoice array, add it
-          this.seatChoice.push(seatId+1);
-          this.reserved[seatId] = 2;
+          this.seatChoice.push(this.listId[seatId]);
+          this.reserved[this.listId[seatId]] = 2;
         } else {
           // Seat is already in the seatChoice array, remove it
-          this.reserved[seatId] = 0;
+          this.reserved[this.listId[seatId]] = 0;
           this.seatChoice.splice(index, 1);
         }
         console.log(this.seatChoice);
       },
       getSeatClass(seatId) {
-        if (this.seatChoice.includes(seatId+1)) {
+        if (this.seatChoice.includes(this.listId[seatId])) {
           return 'choice';
-        } else if (this.reserved[seatId]) {
+        } else if (this.reserved[this.listId[seatId]]) {
           return 'seat occupied';
         } else {
           return 'seat';

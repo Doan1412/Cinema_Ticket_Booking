@@ -1,7 +1,7 @@
 <template>
     <div class="2xl:container md:mx-auto flex flex-row bg-gray-50">
         <div class="basis-1/5">
-            <Sidebar />
+            <AdminSidebar />
         </div>
         <div class="class-list basis-5/6 mt-10 bg-gray-50">
             <h2 class="app-title">Submit a Show</h2>
@@ -111,6 +111,7 @@
     </div>
 </template>
 <script>
+import AdminSidebar from '~/components/AdminSidebar.vue';
 export default {
     data() {
         return {
@@ -122,19 +123,20 @@ export default {
             seatTypes: [],
             seatPrices: [],
             numType: 1,
-            showNoti: '',
-            status: '',
-        }
+            showNoti: "",
+            status: "",
+        };
     },
     async fetch() {
         try {
             await this.$axios.get(`http://localhost:8080/api/movie`).then((res) => {
                 this.$data.movies = res.data;
-            })
+            });
             await this.$axios.get(`http://localhost:8080/api/cinemaHall/all`).then((res) => {
                 this.$data.cinemaHalls = res.data;
-            })
-        } catch (error) {
+            });
+        }
+        catch (error) {
             console.log(error);
         }
     },
@@ -148,7 +150,6 @@ export default {
             }
         },
         async submitData() {
-
             const data = {
                 seatTypes: this.seatTypes,
                 seatPrices: this.seatPrices
@@ -168,9 +169,10 @@ export default {
                 setTimeout(() => {
                     this.showNoti = "";
                 }, 1500);
-            })
+            });
         }
-    }
+    },
+    components: { AdminSidebar }
 };
 
 </script>

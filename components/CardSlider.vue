@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto relative">
+    <div class="container mx-auto relative" >
         <div class="flex items-center justify-between absolute inset-0 w-full h-full">
             <button @click="showPrev" role="button" aria-label="slide forward"
                 class=" z-30  ml-10 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
@@ -21,7 +21,7 @@
         <div class="flex items-center justify-center w-full h-full py-24 sm:py-8 px-4">
             <div class="slider">
                 <div class="slide-ana">
-                    <VueSlickCarousel v-bind="settings" ref="carousel">
+                    <VueSlickCarousel v-bind="settings" ref="carousel" v-if="listMovie.length">
                         <ul v-for="movie in listMovie" :key="movie.id">
                             <div class="px-3">
 
@@ -55,10 +55,10 @@
                                             <a :href="`/movie/${movie.id}`"
                                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                 Details
-                                        </a>
-                                            <button type="button"
+                                            </a>
+                                            <a type="button" :href="`/ticket/movie/${movie.id}`"
                                                 class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Buy
-                                                tickets</button>
+                                                tickets</a>
                                         </div>
                                     </div>
                                 </div>
@@ -80,14 +80,15 @@ import "vue-slick-carousel/dist/vue-slick-carousel.css";
 export default {
     name: "MyComponent",
     components: { VueSlickCarousel },
-    props: {
-        listMovie: {
-            type: Array,
-            required: true,
-        },
-    },
+    // props: {
+    //     listMovie: {
+    //         type: Array,
+    //         required: true,
+    //     },
+    // },
     data() {
         return {
+            listMovie: [],
             settings: {
                 dots: false,
                 infinite: true,
@@ -106,6 +107,15 @@ export default {
                 const roundedRating = Math.round(rating);
                 return Array(roundedRating).fill('');
             };
+        }
+    },
+    async fetch() {
+        try {
+            await this.$axios.get(`http://localhost:8080/api/movie`).then((res) => {
+                this.$data.listMovie = res.data;
+            })
+        } catch (error) {
+            console.error(error);
         }
     },
     methods: {

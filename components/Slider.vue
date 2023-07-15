@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" >
         <div id="animation-carousel" class="relative w-full" data-carousel="static">
             <div class="relative hg overflow-hidden rounded-2xl md:h-96">
                 <ul v-for="movie in movies" :key="movie.id">
@@ -90,11 +90,31 @@ export default {
     components: {
         TrailerPopup,
     },
-    props: {
-        movies: {
-            type: Array,
-            required: true,
-        },
+    // props: {
+    //     movies: {
+    //         type: Array,
+    //         required: true,
+    //     },
+    // },
+    data(){
+        return {
+            movies: [],
+        }
+    },
+    async fetch(){
+        try {
+            await this.$axios.get(`http://localhost:8080/api/movie/isAdvertise`).then((res) => {
+                this.movies = res.data;
+                // console.log(this.movies);
+            })
+        } catch (error) {
+            console.error(error);
+        }
+    },
+    computed:{
+        length(){
+            return this.movies.length;
+        }
     },
     method: {
         check() {
