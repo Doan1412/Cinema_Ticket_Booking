@@ -63,4 +63,6 @@ Functions for staff:
 - Security: Utilized JSON Web Token (JWT) and refresh tokens for authentication, authorization, and implemented security layers on the server side using Spring Security.
   ![image](https://github.com/Doan1412/Cinema_Ticket_Booking/assets/85919961/bcede6d3-5eed-4076-9100-2433c56fe25a)
 
+- OpenAPI Specifications: Integrated Swagger UI to create a user-friendly API documentation management page. This integration allows easy exploration and understanding of the API endpoints, making it convenient for developers to interact with the system.
+- 
 Video demo of the functionalities: [Link to YouTube](https://youtu.be/a3YZ2G7QPdk)
